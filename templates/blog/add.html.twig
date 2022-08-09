@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}add post check24 Project{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Add Post</h1>
+        </div>
+        <form action="{{ path('app_blog_add') }}" method="post">
+            {{ form_widget(form) }}
+            <input type="submit" value="Add Post" class="btn btn-success">
+        </form>
+    </div
+</div>
+{% endblock %}

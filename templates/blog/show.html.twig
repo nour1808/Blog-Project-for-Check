@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post check24 show article{% endblock %}
+
+{% block body %}
+<div class="container">
+    {{ post.createdat|date('d.m.Y - h:m') }}h 
+    <h1>{{ post.title }}</h1>
+    <img src="{{ post.image}}" alt="" width="100%"> 
+    {{ post.content|raw }}
+    
+    <br>
+
+    {% if post.comments is not null %}
+    <h2><b>Comments :</b></h2>
+        {% for comment in post.comments %}
+            <div class="comment">
+               <p>
+                    <b>Created By :</b></span>{{ comment.name }} , at {{post.createdat|date('d.m.Y , h:m') }} : {{ comment.kommentar }}
+                    {% if app.user %}
+                        <a class="btn btn-danger" href="{{ path('app_blog_deleteComment', {'id': comment.id}) }}" onclick="return confirm('Are you sure to delete this post ?');">delete</a>
+                    {% endif %}
+                </p>
+            </div>
+        {% endfor %}
+    {% else %}
+    <p>There is no comment in this post.</p>
+    {% endif %}
+
+    
+
+    <form action="{{ path('app_blog_show', {'id' : post.id }  ) }}" method="post">
+        {{ form_widget(form) }}
+        <input type="submit" value="Add Comment" class="btn btn-success">
+    </form>
+
+</div>
+{% endblock %}
